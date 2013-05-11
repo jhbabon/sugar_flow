@@ -32,10 +32,14 @@ end
 
 configure do
   set :dropbox do
-    config = YAML.load_file("#{settings.root}/config/dropbox.yml")
-
-    session = DropboxSession.new(config['app_key'], config['app_secret'])
-    session.set_access_token(config['access_key'], config['access_secret'])
+    session = DropboxSession.new(
+      ENV['DROPBOX_APP_KEY'],
+      ENV['DROPBOX_APP_SECRET']
+    )
+    session.set_access_token(
+      ENV['DROPBOX_ACCESS_KEY'],
+      ENV['DROPBOX_ACCESS_SECRET']
+    )
 
     DropboxClient.new(session, :dropbox)
   end
