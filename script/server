@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$RACK_ENV" == "development" ]; then
+  exec bundle exec shotgun -p $PORT
+else
+  exec bundle exec thin start -R config.ru -e $RACK_ENV -p $PORT
+fi
