@@ -53,3 +53,7 @@ post '/' do
   save params
   redirect to('/')
 end
+
+get '/graphs' do
+  erb :graphs
+end

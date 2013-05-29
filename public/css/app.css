@@ -2,45 +2,49 @@ body {
   font-family: 'Helvetica neue', sans-serif;
 }
 
-form {
+form#form {
   float: left;
   width: 330px;
 }
-form fieldset {
+form#form fieldset {
   border: none;
   padding: 20px;
   margin: 10px 0;
   background: #EAEAEA;
 }
-form label {
+form#form label {
   display: block;
   float: left;
   clear: left;
   margin: 10px 0;
   font-size: 14px;
 }
-form label b {
+form#form label b {
   display: block;
   float: left;
   width: 80px;
   margin-right: 20px;
 }
-form label input,
-form label textarea,
-form label select {
+form#form label input,
+form#form label textarea,
+form#form label select {
   float: left;
   font-size: 14px;
   width: 180px;
 }
-form label input[type="radio"],
-form label input[type="checkbox"] {
+form#form label input[type="radio"],
+form#form label input[type="checkbox"] {
   width: 20px;
 }
-form p {
+form#form p {
   clear: left;
   font-size: 14px;
   margin: 10px 0 0;
 }
-form input[type="submit"] {
+form#form input[type="submit"] {
   margin-left: 120px;
+}
+
+svg {
+  height: 600px;
 }
