@@ -28,7 +28,7 @@ get '/' do
   erb :index
 end
 
-post '/' do
+post '/record' do
   record = Record.new(params)
   settings.mapper.update record.to_s
 

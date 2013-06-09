@@ -2,47 +2,8 @@ body {
   font-family: 'Helvetica neue', sans-serif;
 }
 
-form#form {
-  float: left;
-  width: 330px;
-}
-form#form fieldset {
-  border: none;
-  padding: 20px;
-  margin: 10px 0;
-  background: #EAEAEA;
-}
-form#form label {
-  display: block;
-  float: left;
-  clear: left;
-  margin: 10px 0;
-  font-size: 14px;
-}
-form#form label b {
-  display: block;
-  float: left;
-  width: 80px;
-  margin-right: 20px;
-}
-form#form label input,
-form#form label textarea,
-form#form label select {
-  float: left;
-  font-size: 14px;
-  width: 180px;
-}
-form#form label input[type="radio"],
-form#form label input[type="checkbox"] {
-  width: 20px;
-}
-form#form p {
-  clear: left;
-  font-size: 14px;
-  margin: 10px 0 0;
-}
-form#form input[type="submit"] {
-  margin-left: 120px;
+.main {
+  padding: 0.75em 0.5em;
 }
 
 svg {

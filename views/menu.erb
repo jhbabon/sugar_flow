@@ -1,0 +1,14 @@
+<div class="pure-g-r">
+  <div class="pure-u">
+    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+      <ul>
+        <li <%= "class=\"pure-menu-selected\"" if request.path_info == '/' %>>
+          <a href="/">Home</a>
+        </li>
+        <li <%= "class=\"pure-menu-selected\"" if request.path_info == '/graphs' %>>
+          <a href="/graphs">Graphs</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
