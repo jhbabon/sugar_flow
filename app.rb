@@ -3,7 +3,7 @@ require 'dropbox_sdk'
 
 require './lib/record'
 require './lib/mapper'
-require './lib/analizer'
+require './lib/parser'
 
 configure do
   set :dropbox do
@@ -36,10 +36,10 @@ post '/' do
 end
 
 get '/graphs' do
-  analizer = Analizer.parse(settings.mapper.read_io)
+  parser = Parser.call(settings.mapper.read_io)
 
   erb :graphs, locals: {
-    data: JSON.generate(analizer.blood_sugar),
-    insulin: JSON.generate(analizer.insulin),
+    data: JSON.generate(parser.blood_sugar),
+    insulin: JSON.generate(parser.insulin),
   }
 end
