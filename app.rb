@@ -1,34 +1,9 @@
 require 'sinatra'
 require 'dropbox_sdk'
 
-def save(params)
-  api  = settings.dropbox
-  file = "/sugar-flow.txt"
-
-  contents = read_file(api, file)
-  contents << "#{parse_record(params)}\n"
-
-  api.put_file file, contents, true
-end
-
-def read_file(api, file)
-  api.get_file file
-rescue DropboxError => e
-  return ""
-end
-
-def parse_record(params)
-  row = ''
-  row << params[:type].to_s.ljust(12)
-  row << ' | '
-  row << params[:time].to_s.ljust(16)
-  row << ' | '
-  row << params[:log].to_s.ljust(5)
-  row << ' | '
-  row << params[:note].to_s
-
-  row
-end
+require './lib/record'
+require './lib/mapper'
+require './lib/analizer'
 
 configure do
   set :dropbox do
@@ -43,6 +18,10 @@ configure do
 
     DropboxClient.new(session, :dropbox)
   end
+
+  set :mapper do
+    Mapper.new(settings.dropbox)
+  end
 end
 
 get '/' do
@@ -50,10 +29,17 @@ get '/' do
 end
 
 post '/' do
-  save params
+  record = Record.new(params)
+  settings.mapper.update record.to_s
+
   redirect to('/')
 end
 
 get '/graphs' do
-  erb :graphs
+  analizer = Analizer.parse(settings.mapper.read_io)
+
+  erb :graphs, locals: {
+    data: JSON.generate(analizer.blood_sugar),
+    insulin: JSON.generate(analizer.insulin),
+  }
 end
