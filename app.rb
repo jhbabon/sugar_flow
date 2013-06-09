@@ -5,6 +5,10 @@ require './lib/record'
 require './lib/mapper'
 require './lib/parser'
 
+use Rack::Auth::Basic, "Authentication required" do |username, password|
+  username == ENV['AUTH_USER'] && password == ENV['AUTH_PASS']
+end
+
 configure do
   set :dropbox do
     session = DropboxSession.new(
