@@ -4,12 +4,19 @@ require 'dropbox_sdk'
 require './lib/record'
 require './lib/mapper'
 require './lib/parser'
+require './lib/dropbox_proxy'
 
 use Rack::Auth::Basic, "Authentication required" do |username, password|
   username == ENV['AUTH_USER'] && password == ENV['AUTH_PASS']
 end
 
-configure do
+configure :development do
+  set :dropbox do
+    DropboxProxy.new
+  end
+end
+
+configure :production do
   set :dropbox do
     session = DropboxSession.new(
       ENV['DROPBOX_APP_KEY'],
@@ -22,7 +29,9 @@ configure do
 
     DropboxClient.new(session, :dropbox)
   end
+end
 
+configure do
   set :mapper do
     Mapper.new(settings.dropbox)
   end
